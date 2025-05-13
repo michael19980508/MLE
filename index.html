@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>0.3% 鹽度換算器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background-color: #fffdf7;
+            padding: 2em;
+            max-width: 650px;
+            margin: auto;
+        }
+        h1 {
+            color: #d67b00;
+        }
+        label, input, button {
+            font-size: 1.2em;
+        }
+        input {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0 1em 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            padding: 0.5em 1em;
+            background-color: #ffa94d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff922b;
+        }
+        .result {
+            font-weight: bold;
+            color: #007f00;
+            margin-top: 1em;
+        }
+        .section {
+            margin-bottom: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 0.3% 鹽度換算器</h1>
+
+    <div class="section">
+        <h2>💧 水量 ➜ 鹽量</h2>
+        <label for="waterVolume">水量（公升）：</label>
+        <input type="number" id="waterVolume" step="0.01" min="0" placeholder="例如：10">
+        <button onclick="calculateSalt()">計算所需鹽量</button>
+        <p class="result" id="resultSalt"></p>
+    </div>
+
+    <div class="section">
+        <h2>🧂 鹽量 ➜ 水量</h2>
+        <label for="saltWeight">鹽量（克）：</label>
+        <input type="number" id="saltWeight" step="0.01" min="0" placeholder="例如：30">
+        <button onclick="calculateWater()">計算可配製水量</button>
+        <p class="result" id="resultWater"></p>
+    </div>
+
+    <script>
+        function calculateSalt() {
+            const waterVolume = parseFloat(document.getElementById("waterVolume").value);
+            if (isNaN(waterVolume) || waterVolume <= 0) {
+                document.getElementById("resultSalt").innerText = "請輸入有效的水量（大於 0）";
+                return;
+            }
+            const salt = waterVolume * 0.003;
+            document.getElementById("resultSalt").innerText = `👉 需要加入 ${salt.toFixed(2)} 克的鹽`;
+        }
+
+        function calculateWater() {
+            const saltWeight = parseFloat(document.getElementById("saltWeight").value);
+            if (isNaN(saltWeight) || saltWeight <= 0) {
+                document.getElementById("resultWater").innerText = "請輸入有效的鹽量（大於 0）";
+                return;
+            }
+            const water = saltWeight / 0.003;
+            document.getElementById("resultWater").innerText = `👉 可配製 ${water.toFixed(2)} 公升的水`;
+        }
+    </script>
+</body>
+</html>
