@@ -72,7 +72,7 @@
                 document.getElementById("resultSalt").innerText = "請輸入有效的水量（大於 0）";
                 return;
             }
-            const salt = waterVolume * 0.003;
+            const salt = waterVolume * 1000 * 0.003; // 修正：轉成公克再乘 0.3%
             document.getElementById("resultSalt").innerText = `👉 需要加入 ${salt.toFixed(2)} 克的鹽`;
         }
 
@@ -82,7 +82,7 @@
                 document.getElementById("resultWater").innerText = "請輸入有效的鹽量（大於 0）";
                 return;
             }
-            const water = saltWeight / 0.003;
+            const water = saltWeight / (1000 * 0.003); // 修正：反推水量需除以 (0.3%)
             document.getElementById("resultWater").innerText = `👉 可配製 ${water.toFixed(2)} 公升的水`;
         }
     </script>
